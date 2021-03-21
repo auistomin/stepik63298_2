@@ -124,7 +124,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = 'https://auistomin.github.io/static/'
+if DEBUG:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://auistomin.github.io/static/'
+
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
     BASE_DIR / 'assets',
