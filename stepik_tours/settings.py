@@ -27,7 +27,7 @@ SECRET_KEY = '#x713f9a1-%p$k96rvo!vag)@r3n4l-ln97$t#4hf%u7=4ai=!'
 DEBUG = False
 
 if DEBUG:
-    ALLOWED_HOSTS = ['*', '127.0.0.1', 'localhost']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
     ALLOWED_HOSTS = ['*']
 
