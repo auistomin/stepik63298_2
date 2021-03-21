@@ -1,6 +1,7 @@
-from django.http import HttpResponseNotFound, HttpResponseServerError
+# from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render
 from django.views import View
+from django.http import Http404
 
 from numpy import random
 
@@ -30,7 +31,12 @@ class DepartureView(View):
                 if tour["departure"] == departure:
                     tours[key] = tour
         n_tours = len(tours)
-        suffix = ('a' if 2 <= n_tours % 10 <= 4 and n_tours % 100 // 10 != 1 else ('' if n_tours % 10 == 1 and n_tours % 100 // 10 != 1 else 'ов'))
+        if 2 <= n_tours % 10 <= 4 and n_tours % 100 // 10 != 1:
+            suffix = 'a'
+        elif n_tours % 10 == 1 and n_tours % 100 // 10 != 1:
+            suffix = ''
+        else:
+            suffix = 'ов'
         price_min = min(tours.items(), key=lambda item: item[1]['price'])[1]['price']
         price_max = max(tours.items(), key=lambda item: item[1]['price'])[1]['price']
         nights_min = min(tours.items(), key=lambda item: item[1]['nights'])[1]['nights']
@@ -54,8 +60,8 @@ class DepartureView(View):
 class TourView(View):
     def get(self, request, tour_id):
         tour = data.tours.get(tour_id)
-        if not tour:
-            abort(404)
+        if tour is None:
+            raise Http404
         stars = '★' * int(tour['stars'])
         context = {
             'title': data.title,
@@ -70,22 +76,24 @@ class TourView(View):
 
 
 def custom_handler404(request, exception):
-    #return HttpResponseNotFound('<h1>Ой, страница не найдена</h1><br>Извините, но мы не нашли запрашиваемую страницу...')
     context = {
         'title': data.title,
         'subtitle': data.subtitle,
         'description': data.description,
         'departures': data.departures,
     }
-    return render(request, "404.html", context=context)
+    response = render(request, '404.html', context=context)
+    response.status_code = 404
+    return response
 
 
 def custom_handler500(request):
-    #return HttpResponseServerError('<h1>Ой, ошибка на сервере</h1><br>Мы уже работаем над этим, попробуйте обновить страницу позже...')
     context = {
         'title': data.title,
         'subtitle': data.subtitle,
         'description': data.description,
         'departures': data.departures,
     }
-    return render(request, "500.html", context=context)
+    response = render(request, '500.html', context=context)
+    response.status_code = 500
+    return response
