@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#x713f9a1-%p$k96rvo!vag)@r3n4l-ln97$t#4hf%u7=4ai=!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = ['*', '127.0.0.1', 'localhost']
@@ -124,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://auistomin.github.io/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
     BASE_DIR / 'assets',
