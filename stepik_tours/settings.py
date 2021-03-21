@@ -56,7 +56,7 @@ ROOT_URLCONF = 'stepik_tours.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates/tours'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,7 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os_path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
-    os_path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'assets',
 ]
