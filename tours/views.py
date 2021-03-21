@@ -17,7 +17,6 @@ class MainView(View):
             'title': data.title,
             'subtitle': data.subtitle,
             'description': data.description,
-            'departures': data.departures,
             'tours': tours
         }
         return render(request, 'index.html', context=context)
@@ -42,10 +41,6 @@ class DepartureView(View):
         nights_min = min(tours.items(), key=lambda item: item[1]['nights'])[1]['nights']
         nights_max = max(tours.items(), key=lambda item: item[1]['nights'])[1]['nights']
         context = {
-            'title': data.title,
-            'subtitle': data.subtitle,
-            'description': data.description,
-            'departures': data.departures,
             'tours': tours,
             'departure_title': data.departures[departure],
             'n_tours': str(n_tours) + ' тур' + suffix,
@@ -64,10 +59,6 @@ class TourView(View):
             raise Http404
         stars = '★' * int(tour['stars'])
         context = {
-            'title': data.title,
-            'subtitle': data.subtitle,
-            'description': data.description,
-            'departures': data.departures,
             'departure_title': data.departures[tour['departure']],
             'tour': tour,
             'stars': stars,
@@ -76,24 +67,12 @@ class TourView(View):
 
 
 def custom_handler404(request, exception):
-    context = {
-        'title': data.title,
-        'subtitle': data.subtitle,
-        'description': data.description,
-        'departures': data.departures,
-    }
-    response = render(request, '404.html', context=context)
+    response = render(request, '404.html')
     response.status_code = 404
     return response
 
 
 def custom_handler500(request):
-    context = {
-        'title': data.title,
-        'subtitle': data.subtitle,
-        'description': data.description,
-        'departures': data.departures,
-    }
-    response = render(request, '500.html', context=context)
+    response = render(request, '500.html')
     response.status_code = 500
     return response
