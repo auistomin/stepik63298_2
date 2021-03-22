@@ -49,7 +49,6 @@ class TourView(View):
         context = {
             'departure_title': data.departures[tour['departure']],
             'tour': tour,
-            'stars': range(int(tour['stars'])),
         }
         return render(request, 'tour.html', context=context)
 
