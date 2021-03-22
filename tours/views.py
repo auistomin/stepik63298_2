@@ -1,4 +1,3 @@
-# from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render
 from django.views import View
 from django.http import Http404
