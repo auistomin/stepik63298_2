@@ -23,9 +23,9 @@ from tours.views import MainView, DepartureView, TourView, custom_handler404, cu
 
 
 urlpatterns = [
-    path('', MainView.as_view()),
-    path('departure/<str:departure>', DepartureView.as_view()),
-    path('tour/<int:tour_id>', TourView.as_view()),
+    path('', MainView.as_view(), name='home'),
+    path('departure/<str:departure>', DepartureView.as_view(), name='departure'),
+    path('tour/<int:tour_id>', TourView.as_view(), name='tour'),
     path('admin/', admin.site.urls),
 ]
 

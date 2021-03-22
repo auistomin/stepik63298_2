@@ -16,7 +16,7 @@
             <p class="card-text">{{ tour.country }}, {{ tour.nights }} ночей, {{ tour.stars }}*</p>
             <p class="card-text">Цена: {{ tour.price }} руб.</p>
             <p class="card-text">{{ tour.description }} руб.</p>
-            <a href="/tour/{{ tour_id }}" class="btn btn-sm btn-primary">Подробнее</a>
+            <a href={% url 'tour' tour_id %} class="btn btn-sm btn-primary">Подробнее</a>
           </div>
         </div>
       </div>

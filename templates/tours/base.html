@@ -13,15 +13,16 @@
 
   <header class="container mt-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">{{ site_title }}</a>
+      <a class="navbar-brand" href="{% url 'home' %}">{{ site_title }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           {% for departure_id, departure_title in all_departures.items %}
-          <li class="nav-item {% if request.path == "/departure/{{ departure_id }}" %} active {% endif %}">
-            <a class="nav-link" href="/departure/{{ departure_id }}">{{ departure_title }}</a>
+          {% url 'departure' departure_id as departure_url %}
+          <li class="nav-item {% if request.path == departure_url %}active{% endif %}">
+            <a class="nav-link" href={{ departure_url }}>{{ departure_title }}</a>
           </li>
           {% endfor %}
         </ul>

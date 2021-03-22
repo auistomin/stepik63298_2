@@ -20,7 +20,7 @@
           <div class="card-body">
             <h2 class="h5 card-title">{{ tour.title }}</h2>
             <p class="card-text">{{ tour.description }}</p>
-            <a href="tour/{{ tour_id }}" class="btn btn-sm btn-primary">Подробнее</a>
+            <a href={% url 'tour' tour_id %} class="btn btn-sm btn-primary">Подробнее</a>
           </div>
         </div>
       </div>
