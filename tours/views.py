@@ -34,18 +34,16 @@ class DepartureView(View):
             suffix = ''
         else:
             suffix = 'ов'
-        price_min = min(tours.items(), key=lambda item: item[1]['price'])[1]['price']
-        price_max = max(tours.items(), key=lambda item: item[1]['price'])[1]['price']
-        nights_min = min(tours.items(), key=lambda item: item[1]['nights'])[1]['nights']
-        nights_max = max(tours.items(), key=lambda item: item[1]['nights'])[1]['nights']
+        prices = [int(tour['price']) for tour in tours.values()]
+        nights = [int(tour['nights']) for tour in tours.values()]
         context = {
             'tours': tours,
             'departure_title': data.departures[departure],
             'n_tours': str(n_tours) + ' тур' + suffix,
-            'price_min': price_min,
-            'price_max': price_max,
-            'nights_min': nights_min,
-            'nights_max': nights_max,
+            'price_min': min(prices),
+            'price_max': max(prices),
+            'nights_min': min(nights),
+            'nights_max': max(nights),
         }
         return render(request, 'departure.html', context=context)
 

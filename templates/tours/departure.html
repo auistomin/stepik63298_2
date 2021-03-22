@@ -4,7 +4,7 @@
 
   <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим {{ departure_title }}</h1>
-    <p class="mb-4">Найдено {{ n_tours }}, от {{ price_min }} до {{ price_max }} и от {{ nights_min }} до {{ nights_max }} ночей</p>
+    <p class="mb-4">Найдено {{ n_tours }}, от {{ price_min }} до {{ price_max }} руб и от {{ nights_min }} до {{ nights_max }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
       {% for tour_id, tour in tours.items %}
