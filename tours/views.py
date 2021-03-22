@@ -23,6 +23,8 @@ class MainView(View):
 
 class DepartureView(View):
     def get(self, request, departure):
+        if not departure in data.departures:
+            raise Http404
         tours = dict()
         if departure in data.departures:
             for key, tour in data.tours.items():
