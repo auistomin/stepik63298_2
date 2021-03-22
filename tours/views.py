@@ -55,11 +55,10 @@ class TourView(View):
         tour = data.tours.get(tour_id)
         if tour is None:
             raise Http404
-        stars = '★' * int(tour['stars'])
         context = {
             'departure_title': data.departures[tour['departure']],
             'tour': tour,
-            'stars': stars,
+            'stars': range(int(tour['stars'])),
         }
         return render(request, 'tour.html', context=context)
 
