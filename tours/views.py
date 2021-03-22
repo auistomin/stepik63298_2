@@ -2,28 +2,25 @@ from django.shortcuts import render
 from django.views import View
 from django.http import Http404
 
-from numpy import random
+from random import sample
 
 import data
 
 
 class MainView(View):
     def get(self, request):
-        indexes = [int(i) for i in range(1, len(data.tours) + 1)]
-        indexes = random.choice(indexes, 6, replace=False)
-        tours = {i: data.tours[i] for i in indexes}
         context = {
             'title': data.title,
             'subtitle': data.subtitle,
             'description': data.description,
-            'tours': tours
+            'tours': dict(sample(data.tours.items(), 6)),
         }
         return render(request, 'index.html', context=context)
 
 
 class DepartureView(View):
     def get(self, request, departure):
-        if not departure in data.departures:
+        if departure not in data.departures:
             raise Http404
         tours = dict()
         if departure in data.departures:
