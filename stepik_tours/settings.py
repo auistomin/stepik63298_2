@@ -70,6 +70,9 @@ TEMPLATES = [
                 'tours.context_processors.site_title',
                 'tours.context_processors.all_departures',
             ],
+            'libraries': {
+                'filters': 'tours.templatetags.filters',
+            },
         },
     },
 ]

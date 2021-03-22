@@ -27,19 +27,12 @@ class DepartureView(View):
             for key, tour in data.tours.items():
                 if tour["departure"] == departure:
                     tours[key] = tour
-        n_tours = len(tours)
-        if 2 <= n_tours % 10 <= 4 and n_tours % 100 // 10 != 1:
-            suffix = 'a'
-        elif n_tours % 10 == 1 and n_tours % 100 // 10 != 1:
-            suffix = ''
-        else:
-            suffix = 'ов'
         prices = [int(tour['price']) for tour in tours.values()]
         nights = [int(tour['nights']) for tour in tours.values()]
         context = {
             'tours': tours,
             'departure_title': data.departures[departure],
-            'n_tours': str(n_tours) + ' тур' + suffix,
+            'tours_count': len(tours),
             'price_min': min(prices),
             'price_max': max(prices),
             'nights_min': min(nights),
