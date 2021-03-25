@@ -24,9 +24,9 @@ class DepartureView(View):
             raise Http404
         tours = dict()
         if departure in data.departures:
-            for key, tour in data.tours.items():
+            for tour_id, tour in data.tours.items():
                 if tour["departure"] == departure:
-                    tours[key] = tour
+                    tours[tour_id] = tour
         prices = [int(tour['price']) for tour in tours.values()]
         nights = [int(tour['nights']) for tour in tours.values()]
         context = {
